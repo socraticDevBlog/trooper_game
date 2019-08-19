@@ -11,12 +11,12 @@ class Flyer {
         this.innercolor = "#0E7A0D";
     }
 
-    draw(canvas, ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-        ctx.fillStyle = this.innercolor;
-        ctx.fill();
+    draw(canvas, context) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+        context.fillStyle = this.innercolor;
+        context.fill();
     }
 
     //https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript (2019-08-19)
