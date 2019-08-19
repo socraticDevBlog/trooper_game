@@ -1,7 +1,5 @@
 class Flyer {
-    
     constructor() {
-
         this.x = 0;
         this.y = 20;
         this.id = this.uuidv4();
