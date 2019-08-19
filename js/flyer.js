@@ -2,10 +2,9 @@ class Flyer {
     
     constructor() {
 
-        var id = this.uuidv4();
         this.x = 0;
         this.y = 20;
-        this.id = id;
+        this.id = this.uuidv4();
         this.radius = 2;
         this.speed = 20;
         this.innercolor = "#0E7A0D";
