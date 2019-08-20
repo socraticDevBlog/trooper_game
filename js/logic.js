@@ -42,12 +42,12 @@ class Runner {
         self.loopCount += 1;
     }
 
-    moveCannon(self, direction) {
-        if (direction === "LEFT"){
-            self.cannon.moveLeft();
-        }else {
-            self.cannon.moveRight();
-        }
+    moveCannonLeft(self) {
+        self.cannon.moveCannonLeft();
+    }
+
+    moveCannonRight(self) {
+        self.cannon.moveRight();
     }
 
     registerFlyer(obj) {
