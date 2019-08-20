@@ -8,8 +8,7 @@ class Flyer {
         this.innercolor = "#0E7A0D";
     }
 
-    draw(canvas, context) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    draw(context) {
         context.beginPath();
         context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
         context.fillStyle = this.innercolor;
