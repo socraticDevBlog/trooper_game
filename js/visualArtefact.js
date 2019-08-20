@@ -31,7 +31,7 @@ class Flyer extends VisualArtefact {
     }
 }
 
-class Canon extends VisualArtefact {
+class Cannon extends VisualArtefact {
     constructor(canvasWidth, canvasHeight) {
         super();
         this.x = canvasWidth / 2;
@@ -56,11 +56,11 @@ class Canon extends VisualArtefact {
 
     draw(context) {
         
-        // drawing canon's base
+        // drawing cannon's base
         //
         drawRectangle(context, this.x, this.y, this.baseWidth, this.baseheight, this.innercolor);
 
-        // drawing canon's head
+        // drawing cannon's head
         //
         drawRectangle(context, this.xHead, this.yHead, this.headWidth, this.headHeight, this.innercolor);
     }
