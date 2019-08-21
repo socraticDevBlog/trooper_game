@@ -44,14 +44,28 @@ class Cannon extends VisualArtefact {
         this.baseheight = 25;
     }
 
-    moveLeft() {
-        this.x -= 7;
-        this.xHead -= 7;
+    moveLeft(canvasWidth) {
+        this.x -= 15;
+        this.xHead -= 15;
+
+        // reappears at the right side of the canvas
+        //
+        if (this.x < 0) {
+            this.x = canvasWidth - 10;
+            this.xHead = canvasWidth;
+        }
     }
 
-    moveRight() {
-        this.x += 7;
-        this.xHead += 7;
+    moveRight(canvasWidth) {
+        this.x += 15;
+        this.xHead += 15;
+
+        // reappears at the left side of the canvas
+        //
+        if (this.x > canvasWidth) {
+            this.x = 10;
+            this.xHead = 20;
+        }
     }
 
     draw(context) {

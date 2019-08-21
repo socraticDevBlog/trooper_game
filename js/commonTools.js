@@ -21,3 +21,9 @@
         context.rect(x, y, width, height); 
         context.fill();
     }
+
+    // return number of items in a dictionary
+    //
+    function dictLength(dict) {
+        return Object.keys(dict).length;
+    }

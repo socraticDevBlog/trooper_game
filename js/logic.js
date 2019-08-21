@@ -8,19 +8,24 @@ class Runner {
         this.loopCount = 0;
     }
 
-    start() {
-        var flyer1 = new Flyer();
-        this.registerFlyer(flyer1);
-    }
-
     loop(self) {
+
+        // clears the whole canvas
+        //
         self.context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // spawn a new flyer when none 
+        //
+        if (dictLength(self.flyers) == 0) {
+            var aFlyer = new Flyer();
+            this.registerFlyer(aFlyer);
+        }
 
         // updating flyers coordinates
         //
         for (var key in self.flyers) {
             var flyer = self.flyerById(key);
-            
+
             if (flyer.x < canvas.width) {
                 flyer.moveRight();
             }else{
@@ -33,10 +38,20 @@ class Runner {
         for (var key in self.bullets) {
             var bullet = self.bulletbyId(key);
             
-            if (bullet.y < canvas.height) {
+            if (bullet.y > 0) {
                 bullet.y -= 10;
             }else{
                 delete self.bullets[key];
+            }
+
+            // checking if bullet hit a flyer
+            //
+            for (var flyerId in self.flyers) {
+                var flyer = self.flyerById(flyerId);
+
+                if (this.isHit(bullet, flyer)) {
+                    delete self.flyers[flyer.id];
+                }
             }
         }
         
@@ -46,7 +61,7 @@ class Runner {
             var flyer = self.flyerById(key);
             flyer.draw(self.context);
         }
-        
+
         // drawing bullets
         //
         for (var key in self.bullets) {
@@ -61,12 +76,12 @@ class Runner {
         self.loopCount += 1;
     }
 
-    moveCannonLeft(self) {
-        self.cannon.moveLeft();
+    moveCannonLeft(self, canvasWidth) {
+        self.cannon.moveLeft(canvasWidth);
     }
 
-    moveCannonRight(self) {
-        self.cannon.moveRight();
+    moveCannonRight(self, canvasWidth) {
+        self.cannon.moveRight(canvasWidth);
     }
 
     registerFlyer(obj) {
@@ -88,5 +103,18 @@ class Runner {
 
     bulletbyId(id) {
         return this.bullets[id];
+    }
+
+    isHit(bullet, flyer) {
+        
+        // target is hit if bullet x,y is within a tolerance of 2 points
+        //
+        var near = (bullet.x >= flyer.x - 2) && (bullet.x <= flyer.x + 2);
+
+        if (near) {
+            return near && (bullet.y >= flyer.y - 2) && (bullet.y <= flyer.y + 2);
+        }else{
+            return false;
+        }
     }
 }
