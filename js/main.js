@@ -16,7 +16,9 @@ function checkKey(e) {
 
     if (event.code == "ArrowRight") {
         gameRunner.moveCannonRight(gameRunner);
-    } else if (event.code == "ArrowLeft") {
+    }else if (event.code == "ArrowLeft") {
         gameRunner.moveCannonLeft(gameRunner);
+    }else if (event.code == "ArrowUp") {
+        gameRunner.fire(gameRunner);
     }
 }

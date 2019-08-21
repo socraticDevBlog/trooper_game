@@ -1,6 +1,6 @@
 class Runner {
     constructor(canvas, context) {
-        this.cannon = canvas;
+        this.canvas = canvas;
         this.context = context;
         this.flyers = {};
         this.bullets = {};
@@ -21,18 +21,37 @@ class Runner {
         for (var key in self.flyers) {
             var flyer = self.flyerById(key);
             
-            if( flyer.x < canvas.width) {
+            if (flyer.x < canvas.width) {
                 flyer.moveRight();
             }else{
                 flyer.resetX();
             }
         }
-
+        
+        // updating bullets coordinates
+        //
+        for (var key in self.bullets) {
+            var bullet = self.bulletbyId(key);
+            
+            if (bullet.y < canvas.height) {
+                bullet.y -= 10;
+            }else{
+                delete self.bullets[key];
+            }
+        }
+        
         // drawing flyers
         //
         for (var key in self.flyers) {
             var flyer = self.flyerById(key);
             flyer.draw(self.context);
+        }
+        
+        // drawing bullets
+        //
+        for (var key in self.bullets) {
+            var bullet = self.bulletbyId(key);
+            bullet.draw(self.context);
         }
 
         // drawing cannon
@@ -43,7 +62,7 @@ class Runner {
     }
 
     moveCannonLeft(self) {
-        self.cannon.moveCannonLeft();
+        self.cannon.moveLeft();
     }
 
     moveCannonRight(self) {
@@ -54,11 +73,20 @@ class Runner {
         this.flyers[obj.id] = obj;
     }
 
+    fire(self) {
+        var bullet = new Bullet(self.cannon.xHead, self.cannon.yHead);
+        self.registerBullet(bullet);
+    }
+
     registerBullet(obj) {
         this.bullets[obj.id] = obj;
     }
 
     flyerById(id) {
         return this.flyers[id];
+    }
+
+    bulletbyId(id) {
+        return this.bullets[id];
     }
 }

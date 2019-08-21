@@ -14,7 +14,7 @@ class Flyer extends VisualArtefact {
     constructor() {
         super();
         this.y = 20;
-        this.radius = 2;
+        this.radius = 5;
         this.speed = 20;
     }
 
@@ -63,5 +63,18 @@ class Cannon extends VisualArtefact {
         // drawing cannon's head
         //
         drawRectangle(context, this.xHead, this.yHead, this.headWidth, this.headHeight, this.innercolor);
+    }
+}
+
+class Bullet extends VisualArtefact {
+    constructor(xCannonHead, yCannonHead) {
+        super();
+        this.x = xCannonHead;
+        this.y = yCannonHead;
+        this.radius = 1;
+    }
+
+    draw(context) {
+        drawCircle(context, this.x, this.y, this.radius, this.innercolor);
     }
 }
