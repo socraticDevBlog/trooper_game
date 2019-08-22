@@ -25,7 +25,7 @@
     width: 100%;
 
     /*   100vh == screen total height ; 160px == header.height + footer.height */
-    min-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
 }
 
 .customFooter{

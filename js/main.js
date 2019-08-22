@@ -1,6 +1,11 @@
 var canvas = document.getElementById("mainCanvas");
 var context = canvas.getContext("2d");
 
+// context.font="10px Helvetica";
+// context.fillStyle = "#0E7A0D";
+// context.fillText("Hello World", 1, 8);
+
+
 document.onkeydown = checkKey;
 
 function checkKey(e) {

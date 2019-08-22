@@ -27,3 +27,11 @@
     function dictLength(dict) {
         return Object.keys(dict).length;
     }
+
+    // printing text for this game
+    //
+    function textToCanvas(context, text, xPos, yPos, color, font) {
+        context.font= font;
+        context.fillStyle = color;
+        context.fillText(text, xPos, yPos);
+    }

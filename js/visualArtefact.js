@@ -10,6 +10,24 @@ class VisualArtefact {
     }
 }
 
+class PointsDisplay extends VisualArtefact {
+    constructor() {
+        super();
+        this.x = 1;
+        this.y = 9;
+        this.title = "credit : ";
+        this.font = "9px Tahoma";
+    }
+
+    refreshPoints(context, points) {
+       textToCanvas(context, this.title + points.toString(), this.x, this.y, this.innercolor, this.font);
+    }
+
+    gameOver(context) {
+        textToCanvas(context, "Game over : refresh browser (F5) to play again !", this.x, this.y, this.innercolor, this.font);
+    }
+}
+
 class Flyer extends VisualArtefact {
     constructor() {
         super();
@@ -19,10 +37,10 @@ class Flyer extends VisualArtefact {
     }
 
     moveRight() {
-        this.x += 3;
+        this.x += 4;
     }
 
-    resetX() {
+    reset() {
         this.x = 0;
     }
 
@@ -42,11 +60,12 @@ class Cannon extends VisualArtefact {
         this.headHeight = 15;
         this.baseWidth = 25;
         this.baseheight = 25;
+        this.stepLenght = 17;
     }
 
     moveLeft(canvasWidth) {
-        this.x -= 15;
-        this.xHead -= 15;
+        this.x -= this.stepLenght;
+        this.xHead -= this.stepLenght;
 
         // reappears at the right side of the canvas
         //
@@ -57,8 +76,8 @@ class Cannon extends VisualArtefact {
     }
 
     moveRight(canvasWidth) {
-        this.x += 15;
-        this.xHead += 15;
+        this.x += this.stepLenght;
+        this.xHead += this.stepLenght;
 
         // reappears at the left side of the canvas
         //
@@ -83,7 +102,7 @@ class Cannon extends VisualArtefact {
 class Bullet extends VisualArtefact {
     constructor(xCannonHead, yCannonHead) {
         super();
-        this.x = xCannonHead;
+        this.x = xCannonHead + 3;
         this.y = yCannonHead;
         this.radius = 1;
     }
