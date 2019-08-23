@@ -107,6 +107,10 @@ class Bullet extends VisualArtefact {
         this.radius = 1;
     }
 
+    moveUp() {
+        this.y -= 10;
+    }
+
     draw(context) {
         drawCircle(context, this.x, this.y, this.radius, this.innercolor);
     }

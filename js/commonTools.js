@@ -1,3 +1,10 @@
+    
+    // return number of items in a dictionary
+    //
+    function dictCount(dict) {
+        return Object.keys(dict).length;
+    }
+
     // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript (2019-08-19)
     //
     function uuidv4() {
@@ -7,31 +14,25 @@
         });
     }
 
-    function drawCircle(context, x, y, radius, innerColor) {
+    function drawCircle(context, x, y, radius, color) {
         context.beginPath();
         context.arc(x, y, radius, 0, Math.PI * 2, true);
-        context.fillStyle = innerColor;
+        context.fillStyle = color;
         context.fill();
     }
 
-    function drawRectangle(context, x, y, width, height, fillColor) {
+    function drawRectangle(context, x, y, width, height, color) {
         context.beginPath();
         context.lineWidth = "6";
-        context.fillStyle = fillColor;
+        context.fillStyle = color;
         context.rect(x, y, width, height); 
         context.fill();
     }
 
-    // return number of items in a dictionary
-    //
-    function dictLength(dict) {
-        return Object.keys(dict).length;
-    }
-
     // printing text for this game
     //
-    function textToCanvas(context, text, xPos, yPos, color, font) {
+    function textToCanvas(context, text, x, y, color, font) {
         context.font= font;
         context.fillStyle = color;
-        context.fillText(text, xPos, yPos);
+        context.fillText(text, x, y);
     }

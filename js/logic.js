@@ -5,22 +5,21 @@ class Runner {
         this.flyers = {};
         this.bullets = {};
         this.cannon = new Cannon(canvas.width, canvas.height);
-        this.pointDisplay = new PointsDisplay();
+        this.display = new PointsDisplay();
         this.points = 15;
     }
-
+    
     loop(self) {
-        const BULLET_SPEED = 10;
         const HIT_FLYER_REWARD = 10;
         const PENALTY = 5; 
-
+        
         // clears the whole canvas
         //
         self.context.clearRect(0, 0, canvas.width, canvas.height);
         
         // spawn a new flyer when none 
         //
-        if (dictLength(self.flyers) == 0) {
+        if (dictCount(self.flyers) == 0) {
             var aFlyer = new Flyer();
             this.registerFlyer(aFlyer);
         }
@@ -44,7 +43,7 @@ class Runner {
             var bullet = self.bulletbyId(key);
             
             if (bullet.y > 0) {
-                bullet.y -= BULLET_SPEED;
+                bullet.moveUp();
             }else{
                 delete self.bullets[key];
             }
@@ -81,10 +80,16 @@ class Runner {
 
         // updating points
         //
-        if (this.points > 0) {
-            self.pointDisplay.refreshPoints(self.context, self.points);
+        // counting bullets in play makes sure we don't remove the points or
+        // display GameOver too early
+        //
+        if (this.points > 0 || (dictCount(self.bullets) > 0)) {
+            self.display.refreshPoints(self.context, self.points);
         }else {
-            self.pointDisplay.gameOver(self.context);
+
+            if (dictCount(self.bullets) === 0) {
+                self.display.gameOver(self.context);
+            }
         }
     }
 
