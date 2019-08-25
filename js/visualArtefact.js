@@ -52,8 +52,72 @@ class Flyer extends VisualArtefact {
         this.x = 0;
     }
 
-    draw(context) {
-        drawCircle(context, this.x, this.y, this.radius, this.innercolor);
+    draw(c) {
+        // turbine
+        //        
+        c.beginPath();
+        c.strokeStyle = this.innercolor;
+        c.moveTo(this.x - 10, this.y);
+        c.lineTo(this.x + 10, this.y);
+        c.moveTo(this.x, this.y);
+        c.lineTo(this.x, this.y + 5);
+        c.lineWidth = 1.5;
+        c.stroke(); 
+
+        // helicopter body
+        //
+        c.beginPath();
+        c.arc(this.x, this.y + 10, 5, 0, Math.PI * 2, false);
+        c.fillStyle=this.innercolor;
+        c.fill();
+
+        // drawing tail
+        //
+        c.beginPath();
+        c.moveTo(this.x, this.y + 10);
+
+        var xBackRotorAxis = 0;
+        var yBackRotorAxis = 0;
+
+        if (this.previousX > this.x) {
+            xBackRotorAxis = this.x + 20;
+            yBackRotorAxis = this.y + 10;
+            c.lineTo(xBackRotorAxis, yBackRotorAxis);
+        }else {
+            xBackRotorAxis = this.x - 20;
+            yBackRotorAxis = this.y + 10;
+            c.lineTo(xBackRotorAxis, yBackRotorAxis);
+        }
+        c.strokeStyle = this.innercolor;
+        c.stroke();
+
+
+        // small circle at tail's end
+        //
+        c.beginPath();
+        c.arc(xBackRotorAxis, yBackRotorAxis, 2, 0, Math.PI * 2, false);
+        c.fillStyle=this.innercolor;
+        c.fill();
+
+        c.beginPath();
+        c.moveTo(this.x, this.y + 10);
+        c.strokeStyle = this.innercolor;
+        c.lineTo(this.x - 3, this.y + 19);
+        c.stroke();
+
+        c.beginPath();
+        c.moveTo(this.x, this.y + 10);
+        c.strokeStyle = this.innercolor;
+        c.lineTo(this.x + 3, this.y + 19);
+        c.stroke();
+
+        // foot rail
+        //
+        c.beginPath();
+        c.moveTo(this.x - 6, this.y + 19);
+        c.strokeStyle = this.innercolor;
+        c.lineTo(this.x + 6, this.y + 19);
+        c.stroke();
     }
 }
 
