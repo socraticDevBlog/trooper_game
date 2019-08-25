@@ -36,3 +36,7 @@
         context.fillStyle = color;
         context.fillText(text, x, y);
     }
+
+    function randomYesNo(treshold) {
+        return (math.random) >= treshold;
+    } 

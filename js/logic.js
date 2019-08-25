@@ -11,7 +11,6 @@ class Runner {
     
     loop(self) {
         const HIT_FLYER_REWARD = 10;
-        const PENALTY = 5; 
         
         // clears the whole canvas
         //
@@ -29,12 +28,7 @@ class Runner {
         for (var key in self.flyers) {
             var flyer = self.flyerById(key);
             
-            if (flyer.x < canvas.width) {
-                flyer.moveRight();
-            }else{
-                flyer.reset();
-                this.points -= PENALTY;
-            }
+            this.moveFlyer(flyer);
         }
         
         // updating bullets coordinates
@@ -139,6 +133,27 @@ class Runner {
             return near && (bullet.y >= flyer.y - 2) && (bullet.y <= flyer.y + 2);
         }else{
             return false;
+        }
+    }
+
+    moveFlyer(flyer) {
+        var isHeadingLeft = flyer.x < flyer.previousX;
+        
+        if (isHeadingLeft) {
+            if (flyer.x > 0) {
+                flyer.moveLeft();
+            } else {
+                flyer.reset();
+                flyer.moveRight;
+                this.points -= 5;
+            }
+        }else {
+            if (flyer.x < self.canvas.width) {
+                flyer.moveRight();
+            }else {
+                flyer.moveLeft();
+                this.points -= 3;
+            }
         }
     }
 }

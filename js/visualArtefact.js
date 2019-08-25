@@ -34,13 +34,21 @@ class Flyer extends VisualArtefact {
         this.y = 20;
         this.radius = 5;
         this.speed = 20;
+        this.previousX = 0;
     }
 
     moveRight() {
+        this.previousX = this.x;
         this.x += 4;
     }
 
+    moveLeft() {
+        this.previousX = this.x
+        this.x -= 4;
+    }
+
     reset() {
+        this.previousX = -1;
         this.x = 0;
     }
 
