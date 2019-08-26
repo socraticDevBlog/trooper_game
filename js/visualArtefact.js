@@ -31,7 +31,7 @@ class PointsDisplay extends VisualArtefact {
 class Flyer extends VisualArtefact {
     constructor() {
         super();
-        this.y = 20;
+        this.y = 30;
         this.radius = 5;
         this.speed = 20;
         this.previousX = 0;
@@ -53,70 +53,76 @@ class Flyer extends VisualArtefact {
     }
 
     draw(c) {
-        // turbine
-        //        
+        const PROPELLER_LENGTH = 10;
+        const DIST_PROPELLER_TO_CABIN = 9;
+        const TAIL_LENGTH = 15;
+        const LINE_THICKNESS = 0.9;
+        const BACK_ROTOR_SIZE = 2;
+        const FEET_RAIL_LENGTH = 12;
+        const CABIN_TO_RAIL_LENGTH = 3;
+        const DISTANCE_CABIN_TO_RAIL = 10;
+
+        c.lineWidth = LINE_THICKNESS;
+
+        // propellers
+        //
         c.beginPath();
         c.strokeStyle = this.innercolor;
-        c.moveTo(this.x - 10, this.y);
-        c.lineTo(this.x + 10, this.y);
+        c.moveTo(this.x - PROPELLER_LENGTH, this.y - DIST_PROPELLER_TO_CABIN);
+        c.lineTo(this.x + PROPELLER_LENGTH, this.y - DIST_PROPELLER_TO_CABIN);
         c.moveTo(this.x, this.y);
-        c.lineTo(this.x, this.y + 5);
-        c.lineWidth = 1.5;
+        c.lineTo(this.x, this.y - DIST_PROPELLER_TO_CABIN);
         c.stroke(); 
 
         // helicopter body
         //
-        c.beginPath();
-        c.arc(this.x, this.y + 10, 5, 0, Math.PI * 2, false);
-        c.fillStyle=this.innercolor;
-        c.fill();
+        drawCircle(c, this.x, this.y, this.radius, this.innercolor);
 
         // drawing tail
         //
         c.beginPath();
-        c.moveTo(this.x, this.y + 10);
+        c.moveTo(this.x, this.y);
 
         var xBackRotorAxis = 0;
         var yBackRotorAxis = 0;
 
+        // draw the tail in the opposite direction where
+        // flyer is heading to 
+        //
         if (this.previousX > this.x) {
-            xBackRotorAxis = this.x + 20;
-            yBackRotorAxis = this.y + 10;
+            xBackRotorAxis = this.x + TAIL_LENGTH;
+            yBackRotorAxis = this.y;
             c.lineTo(xBackRotorAxis, yBackRotorAxis);
         }else {
-            xBackRotorAxis = this.x - 20;
-            yBackRotorAxis = this.y + 10;
+            xBackRotorAxis = this.x - TAIL_LENGTH;
+            yBackRotorAxis = this.y;
             c.lineTo(xBackRotorAxis, yBackRotorAxis);
         }
+
         c.strokeStyle = this.innercolor;
         c.stroke();
-
 
         // small circle at tail's end
         //
-        c.beginPath();
-        c.arc(xBackRotorAxis, yBackRotorAxis, 2, 0, Math.PI * 2, false);
-        c.fillStyle=this.innercolor;
-        c.fill();
+        drawCircle(self.context, xBackRotorAxis, yBackRotorAxis, BACK_ROTOR_SIZE, this.innercolor);
 
-        c.beginPath();
-        c.moveTo(this.x, this.y + 10);
-        c.strokeStyle = this.innercolor;
-        c.lineTo(this.x - 3, this.y + 19);
-        c.stroke();
-
-        c.beginPath();
-        c.moveTo(this.x, this.y + 10);
-        c.strokeStyle = this.innercolor;
-        c.lineTo(this.x + 3, this.y + 19);
-        c.stroke();
-
-        // foot rail
+        // foot rail apparatus
         //
         c.beginPath();
-        c.moveTo(this.x - 6, this.y + 19);
+        c.moveTo(this.x, this.y);
         c.strokeStyle = this.innercolor;
-        c.lineTo(this.x + 6, this.y + 19);
+        c.lineTo(this.x - CABIN_TO_RAIL_LENGTH, this.y + DISTANCE_CABIN_TO_RAIL);
+        c.stroke();
+        c.beginPath();
+        c.moveTo(this.x, this.y);
+        c.strokeStyle = this.innercolor;
+        c.lineTo(this.x + CABIN_TO_RAIL_LENGTH, this.y + DISTANCE_CABIN_TO_RAIL);
+        c.stroke();
+        c.beginPath();
+        c.lineWidth = LINE_THICKNESS * 2;
+        c.moveTo(this.x - FEET_RAIL_LENGTH / 2, this.y + DISTANCE_CABIN_TO_RAIL);
+        c.strokeStyle = this.innercolor;
+        c.lineTo(this.x + FEET_RAIL_LENGTH / 2, this.y + DISTANCE_CABIN_TO_RAIL);
         c.stroke();
     }
 }
