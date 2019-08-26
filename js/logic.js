@@ -11,7 +11,8 @@ class Runner {
     
     loop(self) {
         const HIT_FLYER_REWARD = 10;
-        
+        const WINNING_TRESHOLD = 75;
+
         // clears the whole canvas
         //
         self.context.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,25 +73,29 @@ class Runner {
         //
         self.cannon.draw(self.context);
 
+        
         // updating points
         //
         // counting bullets in play makes sure we don't remove the points or
         // display GameOver too early
         //
-        if (this.points > 0 || (dictCount(self.bullets) > 0)) {
+        if (this.points >= WINNING_TRESHOLD) {
+            self.display.win(self.context);
+            self.bullets = 0;
+        }
+        else if (this.points > 0 || (dictCount(self.bullets) > 0)) {
             self.display.refreshPoints(self.context, self.points);
-        }else {
-
-            if (dictCount(self.bullets) === 0) {
-                self.display.gameOver(self.context);
-            }
+        }else if (this.points < 1 && dictCount(self.bullets) === 0) {
+            self.display.gameOver(self.context);
+        } else {
+            console.log('something is wrong with the points');
         }
     }
-
+    
     moveCannonLeft(self, canvasWidth) {
         self.cannon.moveLeft(canvasWidth);
     }
-
+    
     moveCannonRight(self, canvasWidth) {
         self.cannon.moveRight(canvasWidth);
     }
@@ -145,14 +150,20 @@ class Runner {
             } else {
                 flyer.reset();
                 flyer.moveRight;
-                this.points -= 5;
+
+                if (this.points < WINNING_TRESHOLD) {
+                    this.points -= 5;
+                }
             }
         }else {
             if (flyer.x < self.canvas.width) {
                 flyer.moveRight();
             }else {
                 flyer.moveLeft();
-                this.points -= 3;
+            
+                if (this.points < WINNING_TRESHOLD) {
+                    this.points -= 3;
+                }
             }
         }
     }

@@ -26,6 +26,10 @@ class PointsDisplay extends VisualArtefact {
     gameOver(context) {
         textToCanvas(context, "Game over : refresh browser (F5) to play again !", this.x, this.y, this.innercolor, this.font);
     }
+
+    win(context) {
+        textToCanvas(context, "YOU WIN !  AWESOME !!!", this.x, this.y, this.innercolor, this.font);
+    }
 }
 
 class Flyer extends VisualArtefact {
