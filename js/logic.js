@@ -1,3 +1,5 @@
+const WINNING_TRESHOLD = 75;
+
 class Runner {
     constructor(canvas, context) {
         this.canvas = canvas;
@@ -11,7 +13,6 @@ class Runner {
     
     loop(self) {
         const HIT_FLYER_REWARD = 10;
-        const WINNING_TRESHOLD = 75;
 
         // clears the whole canvas
         //
@@ -29,7 +30,7 @@ class Runner {
         for (var key in self.flyers) {
             var flyer = self.flyerById(key);
             
-            this.moveFlyer(flyer);
+            this.moveFlyer(self, flyer);
         }
         
         // updating bullets coordinates
@@ -141,7 +142,7 @@ class Runner {
         }
     }
 
-    moveFlyer(flyer) {
+    moveFlyer(self, flyer) {
         var isHeadingLeft = flyer.x < flyer.previousX;
         
         if (isHeadingLeft) {
@@ -151,8 +152,8 @@ class Runner {
                 flyer.reset();
                 flyer.moveRight;
 
-                if (this.points < WINNING_TRESHOLD) {
-                    this.points -= 5;
+                if (self.points < WINNING_TRESHOLD) {
+                    self.points -= 5;
                 }
             }
         }else {
@@ -161,8 +162,8 @@ class Runner {
             }else {
                 flyer.moveLeft();
             
-                if (this.points < WINNING_TRESHOLD) {
-                    this.points -= 3;
+                if (self.points < WINNING_TRESHOLD) {
+                    self.points -= 3;
                 }
             }
         }
