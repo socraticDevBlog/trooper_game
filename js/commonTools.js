@@ -23,10 +23,10 @@
 
     function drawRectangle(context, x, y, width, height, color) {
         context.beginPath();
-        context.lineWidth = "6";
-        context.fillStyle = color;
+        context.lineWidth = "3";
+        context.strokeStyle = color;
         context.rect(x, y, width, height); 
-        context.fill();
+        context.stroke();
     }
 
     // printing text for this game
@@ -35,4 +35,9 @@
         context.font= font;
         context.fillStyle = color;
         context.fillText(text, x, y);
+    }
+
+    function clearScreen(canvas) {
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
     }

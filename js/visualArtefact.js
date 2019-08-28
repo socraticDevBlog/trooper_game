@@ -7,6 +7,30 @@ class VisualArtefact {
         // monochrome : green
         //
         this.innercolor = "#0E7A0D";
+        this.font = "9px Tahoma";
+    }
+}
+
+class MenuDisplay extends VisualArtefact {
+    constructor() {
+        super();
+        this.title = "Shoot the chopper down";
+        this.levelOne = "Score " + WINNING_TRESHOLD + " points to win";
+        this.keyLeft = "Arrow left [ <- ] to move cannon to the left";
+        this.keyRight = "Arrow right [ -> ]  to move cannon to the right";
+        this.keyUp = "Arrow up [ ^ ] to fire";
+        this.keyP = "Press key P to pause the game";
+        this.keyS = "Press key S to start the game";
+    }
+
+    print(context) {
+        textToCanvas(context, this.title, 40, 10, this.innercolor, this.font);
+        textToCanvas(context, this.levelOne, 40, 20, this.innercolor, this.font);
+        textToCanvas(context, this.keyLeft, 40, 40, this.innercolor, this.font);
+        textToCanvas(context, this.keyRight, 40, 50, this.innercolor, this.font);
+        textToCanvas(context, this.keyUp, 40, 60, this.innercolor, this.font);
+        textToCanvas(context, this.keyP, 40, 80, this.innercolor, this.font);
+        textToCanvas(context, this.keyS, 40, 100, this.innercolor, this.font);
     }
 }
 
@@ -16,7 +40,6 @@ class PointsDisplay extends VisualArtefact {
         this.x = 1;
         this.y = 9;
         this.title = "credit : ";
-        this.font = "9px Tahoma";
     }
 
     refreshPoints(context, points) {

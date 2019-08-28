@@ -1,25 +1,39 @@
 var canvas = document.getElementById("mainCanvas");
 var context = canvas.getContext("2d");
 
+var gameRunner = new Runner(canvas, context);
+
+// display main menu
+//
+gameRunner.menu(gameRunner);
+
 document.onkeydown = checkKey;
 
 function checkKey(e) {
     var event = window.event ? window.event : e;
 
-    if (event.code == "ArrowRight") {
-        gameRunner.moveCannonRight(gameRunner, canvas.width);
-    }else if (event.code == "ArrowLeft") {
-        gameRunner.moveCannonLeft(gameRunner, canvas.width);
-    }else if (event.code == "ArrowUp") {
-        gameRunner.fire(gameRunner);
+    switch(event.code) {
+        case "ArrowRight":
+            gameRunner.moveCannonRight(gameRunner, canvas.width);
+            break;
+        
+        case "ArrowLeft":
+            gameRunner.moveCannonLeft(gameRunner, canvas.width);
+            break;
+
+        case "ArrowUp":
+            gameRunner.fire(gameRunner);
+            break;
+
+        case "KeyS":
+            gameRunner.start(gameRunner);
+            break;
+
+        case "KeyP":
+            gameRunner.pause(gameRunner);
+            break;
+
+        case "KeyM":
+            gameRunner.menuDisplay(gameRunner);
     }
 }
-
-var gameRunner = new Runner(canvas, context);
-
-// passing the gameRunner to itself ... weird but necessary to 
-// preserve object properties defined and usable ...
-//
-setInterval(function() {
-    gameRunner.loop(gameRunner)}, 50);
-    

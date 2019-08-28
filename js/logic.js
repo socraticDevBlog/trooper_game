@@ -9,6 +9,32 @@ class Runner {
         this.cannon = new Cannon(canvas.width, canvas.height);
         this.display = new PointsDisplay();
         this.points = 15;
+        this.loopingInverval = null;
+        this.gameIsOn = false;
+        this.menuDisplay = new MenuDisplay();
+    }
+
+    start(self) {
+        if (this.gameIsOn) {
+            return;
+        }
+
+        this.loopingInterval = setInterval(function() {self.loop(self)}, 50);
+        this.gameIsOn = true;
+    }
+
+    pause(self) {
+        if (!this.gameIsOn) {
+            this.start(self);
+            return;
+        }
+
+        clearInterval(self.loopingInterval);
+        this.gameIsOn = false;
+    }
+
+    menu(self) {
+        self.menuDisplay.print(self.context);
     }
     
     loop(self) {
@@ -16,7 +42,7 @@ class Runner {
 
         // clears the whole canvas
         //
-        self.context.clearRect(0, 0, canvas.width, canvas.height);
+        clearScreen(self.canvas);
         
         // spawn a new flyer when none 
         //
