@@ -33,8 +33,20 @@ class Runner {
         this.gameIsOn = false;
     }
 
+    callMenuDisplay(self) {
+        if (!this.gameIsOn) {
+            this.start(self);
+            return;
+        }
+
+        this.menu(self);
+    }
+
     menu(self) {
+        clearScreen(this.canvas);
+        clearInterval(self.loopingInterval);
         self.menuDisplay.print(self.context);
+        this.gameIsOn = false;
     }
     
     loop(self) {

@@ -34,6 +34,7 @@ function checkKey(e) {
             break;
 
         case "KeyM":
-            gameRunner.menuDisplay(gameRunner);
+            gameRunner.callMenuDisplay(gameRunner);
+            break;
     }
 }

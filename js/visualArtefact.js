@@ -21,6 +21,7 @@ class MenuDisplay extends VisualArtefact {
         this.keyUp = "Arrow up [ ^ ] to fire";
         this.keyP = "Press key P to pause the game";
         this.keyS = "Press key S to start the game";
+        this.restart = "Refresh your browser to play another game.";
     }
 
     print(context) {
@@ -31,6 +32,7 @@ class MenuDisplay extends VisualArtefact {
         textToCanvas(context, this.keyUp, 40, 60, this.innercolor, this.font);
         textToCanvas(context, this.keyP, 40, 80, this.innercolor, this.font);
         textToCanvas(context, this.keyS, 40, 100, this.innercolor, this.font);
+        textToCanvas(context, this.restart, 40, 120, this.innercolor, this.font);
     }
 }
 
