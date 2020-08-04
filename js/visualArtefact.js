@@ -21,7 +21,7 @@ class MenuDisplay extends VisualArtefact {
         this.keyUp = "Arrow up [ ^ ] to fire";
         this.keyP = "Press key P to pause the game";
         this.keyS = "Press key S to start the game";
-        this.restart = "Refresh your browser to play another game.";
+        this.restart = "Press key R to play another game.";
     }
 
     print(context) {

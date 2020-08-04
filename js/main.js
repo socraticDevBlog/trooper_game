@@ -33,6 +33,10 @@ function checkKey(e) {
             gameRunner.pause(gameRunner);
             break;
 
+        case "KeyR":
+            window.location.reload();
+            break;
+
         case "KeyM":
             gameRunner.callMenuDisplay(gameRunner);
             break;
